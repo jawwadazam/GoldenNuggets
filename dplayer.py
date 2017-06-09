@@ -49,10 +49,11 @@ class PokerPlayerAPI(Resource):
     #   -- all in --
     #   bid == max_bid -> all in
     #
-    #  @param data : a dictionary containing the following values
+    #  @param data : a dictionary containing the following values - example: data['pot']
     #                min_bid   : minimum bid to return to stay in the game
     #                max_bid   : maximum possible bid
     #                big_blind : the current value of the big blind
+    #                pot       : the total value of the current pot
     #                board     : a list of board cards on the table as string '<rank><suit>'
     #                hand      : a list of individual hand cards as string '<rank><suit>'
     #
