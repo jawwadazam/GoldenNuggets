@@ -28,7 +28,7 @@ class PokerPlayerAPI(Resource):
 
     ## return bid to caller
     #
-    #  Depending on the cards passed to this function in data
+    #  Depending on the cards passed to this function in the data parameter,
     #  this function has to return the next bid.
     #  The following rules are applied:
     #   -- fold --
@@ -37,7 +37,7 @@ class PokerPlayerAPI(Resource):
     #   (bid > min_bid) and (bid < (min_bid+big_blind)) -> ** error **
     #
     #   -- check --
-    #   bid == 0 and min_bid == 0 -> check
+    #   (bid == 0) and (min_bid == 0) -> check
     #
     #   -- call --
     #   (bid == min_bid) and (min_bid > 0)
