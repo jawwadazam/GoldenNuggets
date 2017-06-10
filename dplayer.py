@@ -66,7 +66,10 @@ class PokerPlayerAPI(Resource):
     # @return a dictionary containing the following values
     #         bid  : a number between 0 and max_bid
     def __get_bid(self, data):
-
+        if(self.bid > data.max_bid or self.bid < data.min_bid):
+            return "error"
+        else:
+            return self.bid
         return 10
 
     # dispatch incoming get commands
@@ -118,8 +121,7 @@ def main():
         print('registration successful')
 
     try:
-       # app.run(host='0.0.0.0', port=api_port, debug=Flase)
-        app.run(host="", port= api_port, debug= True)
+       app.run(host="192.168.0.26", port= api_port, debug= True)
 
     finally:
         put("%s/dpoker/v1/leave_game"%gregister_url, data={'team': team_name, \
