@@ -8,7 +8,7 @@
 # -----------------------------------------------------------
 # Configuration
 # You need to change the setting according to your environment
-gregister_url='http://localhost:5001'
+gregister_url='http://192.168.0.5:5001'
 glocalip_adr='127.0.0.1'
 
 # -----------------------------------------------------------
@@ -32,8 +32,8 @@ class PokerPlayerAPI(Resource):
     #  this function has to return the next bid.
     #  The following rules are applied:
     #   -- fold --
-    #   bid < min_bid
-    #   bid > max_bid -> ** error **
+    #    bid < min_bid
+    #    bid > max_bid -> ** error **
     #   (bid > min_bid) and (bid < (min_bid+big_blind)) -> ** error **
     #
     #   -- check --
@@ -67,7 +67,7 @@ class PokerPlayerAPI(Resource):
     #         bid  : a number between 0 and max_bid
     def __get_bid(self, data):
 
-        return 0
+        return 10
 
     # dispatch incoming get commands
     def get(self, command_id):
@@ -98,11 +98,11 @@ def main():
         api_pass = sys.argv[3]
     else:
         print("""
-DevOps Poker Bot - usage instruction
-------------------------------------
-python3 dplayer.py <team name> <port> <password>
-example:
-    python3 dplayer bazinga 40001 x407
+        DevOps Poker Bot - usage instruction
+        ------------------------------------
+        python3 dplayer.py <team name> <port> <password>
+        example:
+        python3 dplayer bazinga 40001 x407
         """)
         return 0
 
@@ -118,11 +118,15 @@ example:
         print('registration successful')
 
     try:
-        app.run(host='0.0.0.0', port=api_port, debug=False)
+       # app.run(host='0.0.0.0', port=api_port, debug=Flase)
+        app.run(host="", port= api_port, debug= True)
+
     finally:
         put("%s/dpoker/v1/leave_game"%gregister_url, data={'team': team_name, \
                                                            'url': api_url,\
                                                            'pass': api_pass}).json()
+
+
 # run the main function
 if __name__ == '__main__':
     main()
